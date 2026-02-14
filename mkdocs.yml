@@ -1,60 +1,48 @@
-name: Deploy Docs to GitHub Pages
+mkdocs.yml
+docs/
+  index.md
+  quickstart.md
+  demo-evidence-pack.md
+  glossary.md
+  faq.md
 
-on:
-  push:
-    branches: ["main"]
-    paths:
-      - "docs/**"
-      - "mkdocs.yml"
-      - "requirements.txt"
-      - ".github/workflows/docs.yml"
-  workflow_dispatch:
+  concepts/
+    logs-vs-receipts.md
+    evidence-handoff.md
+    trust-model.md
+    threat-model-summary.md
+    minimal-disclosure.md
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+  specs/
+    overview.md
+    evidence-pack-format.md
+    pack-manifest.md
+    proof-envelope.md
+    canonicalization-jcs-profile.md
+    signing-hash-domain-separation.md
+    ledger-semantics.md
+    offline-verifier-cli.md
+    reason-codes.md
+    suite-registry.md
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  conformance/
+    test-vectors.md
+    validation-workflow.md
+    compatibility-policy.md
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  security/
+    security-baseline.md
+    key-management.md
+    replay-rollback.md
+    data-handling.md
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: "pip"
+  integrations/
+    opentelemetry.md
+    mcp-adapters.md
 
-      - name: Install deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+  releases/
+    changelog.md
+    versioning-policy.md
 
-      - name: Build site
-        run: mkdocs build --strict --site-dir site
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+  roadmap.md
 
