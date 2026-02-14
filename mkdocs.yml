@@ -1,0 +1,103 @@
+site_name: SealedProof Docs
+site_description: Verifiable Evidence Layer for Agent Actions — Offline Verifiable, Non-Repudiable, Minimal Disclosure, Evidence Handoff.
+site_url: https://sealedproof.github.io/sealedproof-docs/
+repo_name: sealedproof/sealedproof-docs
+repo_url: https://github.com/sealedproof/sealedproof-docs
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+    - toc.follow
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: date
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.inlinehilite
+  - pymdownx.highlight
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: index.md
+
+  - Start Here:
+      - Quickstart (5 min): quickstart.md
+      - Demo Evidence Pack: demo-evidence-pack.md
+      - Glossary: glossary.md
+      - FAQ: faq.md
+
+  - Concepts:
+      - Logs vs Receipts: concepts/logs-vs-receipts.md
+      - Evidence Handoff: concepts/evidence-handoff.md
+      - Trust Model: concepts/trust-model.md
+      - Threat Model (Summary): concepts/threat-model-summary.md
+      - Minimal Disclosure: concepts/minimal-disclosure.md
+
+  - Specs (v0.1 Draft):
+      - Overview: specs/overview.md
+      - Evidence Pack Format: specs/evidence-pack-format.md
+      - Pack Manifest: specs/pack-manifest.md
+      - Proof Envelope: specs/proof-envelope.md
+      - Canonicalization (JCS Profile): specs/canonicalization-jcs-profile.md
+      - Signing & Hash Domain Separation: specs/signing-hash-domain-separation.md
+      - Ledger Semantics (Append-only): specs/ledger-semantics.md
+      - Offline Verifier CLI: specs/offline-verifier-cli.md
+      - Reason Codes: specs/reason-codes.md
+      - Suite Registry: specs/suite-registry.md
+
+  - Conformance:
+      - Test Vectors: conformance/test-vectors.md
+      - Validation Workflow: conformance/validation-workflow.md
+      - Compatibility Policy: conformance/compatibility-policy.md
+
+  - Security:
+      - Security Baseline: security/security-baseline.md
+      - Key Management & Rotation: security/key-management.md
+      - Replay/Rollback Protections: security/replay-rollback.md
+      - Data Handling & Privacy: security/data-handling.md
+
+  - Integrations:
+      - OpenTelemetry (Positioning): integrations/opentelemetry.md
+      - MCP/Agent Framework Adapters: integrations/mcp-adapters.md
+
+  - Releases:
+      - Changelog: releases/changelog.md
+      - Versioning Policy: releases/versioning-policy.md
+
+  - Roadmap: roadmap.md
