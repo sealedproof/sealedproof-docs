@@ -1,103 +1,60 @@
-site_name: SealedProof Docs
-site_description: Verifiable Evidence Layer for Agent Actions — Offline Verifiable, Non-Repudiable, Minimal Disclosure, Evidence Handoff.
-site_url: https://sealedproof.github.io/sealedproof-docs/
-repo_name: sealedproof/sealedproof-docs
-repo_url: https://github.com/sealedproof/sealedproof-docs
-edit_uri: edit/main/docs/
+name: Deploy Docs to GitHub Pages
 
-theme:
-  name: material
-  language: en
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.indexes
-    - navigation.top
-    - search.suggest
-    - search.highlight
-    - content.code.copy
-    - content.action.edit
-    - toc.follow
-  palette:
-    - scheme: default
-      toggle:
-        icon: material/weather-night
-        name: Dark mode
-    - scheme: slate
-      toggle:
-        icon: material/weather-sunny
-        name: Light mode
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "requirements.txt"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
 
-plugins:
-  - search
-  - git-revision-date-localized:
-      enable_creation_date: true
-      type: date
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-markdown_extensions:
-  - admonition
-  - attr_list
-  - def_list
-  - footnotes
-  - md_in_html
-  - tables
-  - toc:
-      permalink: true
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
-  - pymdownx.inlinehilite
-  - pymdownx.highlight
-  - pymdownx.snippets
-  - pymdownx.tasklist:
-      custom_checkbox: true
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
-nav:
-  - Home: index.md
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  - Start Here:
-      - Quickstart (5 min): quickstart.md
-      - Demo Evidence Pack: demo-evidence-pack.md
-      - Glossary: glossary.md
-      - FAQ: faq.md
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
 
-  - Concepts:
-      - Logs vs Receipts: concepts/logs-vs-receipts.md
-      - Evidence Handoff: concepts/evidence-handoff.md
-      - Trust Model: concepts/trust-model.md
-      - Threat Model (Summary): concepts/threat-model-summary.md
-      - Minimal Disclosure: concepts/minimal-disclosure.md
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-  - Specs (v0.1 Draft):
-      - Overview: specs/overview.md
-      - Evidence Pack Format: specs/evidence-pack-format.md
-      - Pack Manifest: specs/pack-manifest.md
-      - Proof Envelope: specs/proof-envelope.md
-      - Canonicalization (JCS Profile): specs/canonicalization-jcs-profile.md
-      - Signing & Hash Domain Separation: specs/signing-hash-domain-separation.md
-      - Ledger Semantics (Append-only): specs/ledger-semantics.md
-      - Offline Verifier CLI: specs/offline-verifier-cli.md
-      - Reason Codes: specs/reason-codes.md
-      - Suite Registry: specs/suite-registry.md
+      - name: Build site
+        run: mkdocs build --strict --site-dir site
 
-  - Conformance:
-      - Test Vectors: conformance/test-vectors.md
-      - Validation Workflow: conformance/validation-workflow.md
-      - Compatibility Policy: conformance/compatibility-policy.md
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
-  - Security:
-      - Security Baseline: security/security-baseline.md
-      - Key Management & Rotation: security/key-management.md
-      - Replay/Rollback Protections: security/replay-rollback.md
-      - Data Handling & Privacy: security/data-handling.md
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
 
-  - Integrations:
-      - OpenTelemetry (Positioning): integrations/opentelemetry.md
-      - MCP/Agent Framework Adapters: integrations/mcp-adapters.md
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
 
-  - Releases:
-      - Changelog: releases/changelog.md
-      - Versioning Policy: releases/versioning-policy.md
-
-  - Roadmap: roadmap.md
