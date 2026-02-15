@@ -1,48 +1,14 @@
-mkdocs.yml
-docs/
-  index.md
-  quickstart.md
-  demo-evidence-pack.md
-  glossary.md
-  faq.md
+site_name: SealedProof Docs
 
-  concepts/
-    logs-vs-receipts.md
-    evidence-handoff.md
-    trust-model.md
-    threat-model-summary.md
-    minimal-disclosure.md
+theme:
+  name: material
 
-  specs/
-    overview.md
-    evidence-pack-format.md
-    pack-manifest.md
-    proof-envelope.md
-    canonicalization-jcs-profile.md
-    signing-hash-domain-separation.md
-    ledger-semantics.md
-    offline-verifier-cli.md
-    reason-codes.md
-    suite-registry.md
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - FAQ: faq.md
+  - Specs:
+      - Overview (EN): specs/overview.md
+     
 
-  conformance/
-    test-vectors.md
-    validation-workflow.md
-    compatibility-policy.md
-
-  security/
-    security-baseline.md
-    key-management.md
-    replay-rollback.md
-    data-handling.md
-
-  integrations/
-    opentelemetry.md
-    mcp-adapters.md
-
-  releases/
-    changelog.md
-    versioning-policy.md
-
-  roadmap.md
 
