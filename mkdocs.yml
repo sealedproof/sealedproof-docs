@@ -5,9 +5,6 @@ theme:
 
 nav:
   - Home: index.md
-  - Quickstart: quickstart.md
-  - FAQ: faq.md
-
   - Concepts:
       - Trust Model: concepts/trust-model.md
       - Threat Model Summary: concepts/threat-model-summary.md
@@ -41,6 +38,9 @@ nav:
       - Proof Envelope: specs/proof-envelope.md
       - Reason Codes: specs/reason-codes.md
       - Offline Verifier CLI: specs/offline-verifier-cli.md
+
+  - Quickstart: quickstart.md
+  - FAQ: faq.md
      
 
 
