@@ -7,8 +7,40 @@ nav:
   - Home: index.md
   - Quickstart: quickstart.md
   - FAQ: faq.md
+
+  - Concepts:
+      - Trust Model: concepts/trust-model.md
+      - Threat Model Summary: concepts/threat-model-summary.md
+      - Logs vs Evidence: concepts/logs-vs-receipts.md
+      - Minimal Disclosure: concepts/minimal-disclosure.md
+      - Evidence Handoff: concepts/evidence-handoff.md
+
+  - Security:
+      - Security Baseline: security/security-baseline.md
+      - Replay & Rollback: security/replay-rollback.md
+      - Key Management: security/key-management.md
+      - Data Handling: security/data-handling.md
+
+  - Conformance:
+      - Validation Workflow: conformance/validation-workflow.md
+      - Test Vectors: conformance/test-vectors.md
+      - Compatibility Policy: conformance/compatibility-policy.md
+
+  - Integrations:
+      - OpenTelemetry: integrations/opentelemetry.md
+      - MCP Adapters: integrations/mcp-adapters.md
+
   - Specs:
-      - Overview (EN): specs/overview.md
+      - Overview: specs/overview.md
+      - Evidence Pack Format: specs/evidence-pack-format.md
+      - Canonicalization (JCS Profile): specs/canonicalization-jcs-profile.md
+      - Signing Hash Domain Separation: specs/signing-hash-domain-separation.md
+      - Suite Registry: specs/suite-registry.md
+      - Ledger Semantics: specs/ledger-semantics.md
+      - Pack Manifest: specs/pack-manifest.md
+      - Proof Envelope: specs/proof-envelope.md
+      - Reason Codes: specs/reason-codes.md
+      - Offline Verifier CLI: specs/offline-verifier-cli.md
      
 
 
